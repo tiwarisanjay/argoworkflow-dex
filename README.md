@@ -1,10 +1,11 @@
 # argoworkflow-dex
 Dex Integration for Argo workflow without argocd dex
-# Create a Microsoft AzureAD OIDC Client before anything. Following documentation to create one. 
+# Microsoft Connector
+## Create a Microsoft AzureAD OIDC Client before anything. Following documentation to create one. 
 - https://docs.microsoft.com/en-us/power-apps/maker/portals/configure/configure-openid-settings 
 - Save your `Application (client) ID` , `Directory (tenant) ID` and value for `client secret`. We will need it for our kubernates seceret and configmaps 
 
-# Pre-requisites
+## Pre-requisites
 - Lets run following command before our deployments 
 
     ```bash
