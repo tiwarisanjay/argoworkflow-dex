@@ -1,0 +1,12 @@
+apiVersion: v2
+name: awdex-github
+description: A Helm chart for argo workflow integration with dex using github connector
+type: application
+version: 0.1.0
+appVersion: "v2.30.0"
+dependencies:
+- name: argo-workflows
+  version: "0.16.2"
+  repository: "https://argoproj.github.io/argo-helm"
+maintainers:
+  - name: tiwarisanjay

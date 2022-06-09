@@ -1,0 +1,55 @@
+dex:
+  serviceType: LoadBalancer
+  loadBalancerIP: 13.133.133.12
+  image:
+    registry: ghcr.io
+    repository: dexidp/dex
+    tag: v2.30.0
+  config:
+    clientid: UPDATE_CLIENT_ID
+    tenantid: UPDATE_TENANT_ID
+    clientSecret: UPDATE_CLIENT_SECRET
+    issuer: https://13.133.133.12:5556/dex # Dex URL ex : https://13.133.133.12:5556/dex
+    staticClient:
+      redirectUrl: https://12.123.12.32:2746/oauth2/callback # Argo workflow redirect url ex : https://12.123.12.32:2746/oauth2/callback
+argo-workflows:
+  controller:
+    image:
+      registry: quay.io
+      repository: argoproj/workflow-controller
+      tag: v3.3.6
+  server:
+    serviceAccount:
+      name: argo-workflow-server-sa
+    secure: true
+    image:
+      registry: quay.io
+      repository: argoproj/argocli
+      tag: v3.3.6
+    serviceType: LoadBalancer
+    loadBalancerIP: 12.123.12.32
+    volumeMounts:
+    - name: ca-pemstore
+      mountPath: /etc/ssl/certs/ca.crt
+      subPath: ca.crt
+      readOnly: false
+    volumes:
+    - name: ca-pemstore
+      configMap:
+        name: dex-ca    
+    extraArgs:
+      - --auth-mode=sso
+    sso:
+      issuer: https://13.133.133.12:5556/dex
+      clientId:
+        name: argo-workflows-sso
+        key: client-id
+      clientSecret:
+        name: argo-workflows-sso
+        key: client-secret
+      redirectUrl: https://12.123.12.32:2746/oauth2/callback
+      rbac:
+        enabled: true
+        # secretWhitelist: 
+        # - argo-workflows-sso
+        # - tls-secret
