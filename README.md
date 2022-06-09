@@ -18,7 +18,7 @@ Dex Integration for Argo workflow without argocd dex
     # Script will generate the self signed cert and will create  tls secret for dex and ca configmap for argo
     # Script wil also create secret for argo-workflow-sso 
     ```
-- Update awdex-microsoft/values.yaml for all the required values. 
+- Update `awdex-microsoft/values.yaml` for all the required values. 
 - Verify you yamls first
     ```bash
     helm template demo . -f values.yaml -s templates/dex.yaml -n argo 
