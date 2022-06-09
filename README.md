@@ -4,7 +4,7 @@ Dex Integration for Argo workflow without argocd dex
 ## Create a Microsoft AzureAD OIDC Client before anything. Following documentation to create one. 
 - https://docs.microsoft.com/en-us/power-apps/maker/portals/configure/configure-openid-settings 
 - Save your `Application (client) ID` , `Directory (tenant) ID` and value for `client secret`. We will need it for our kubernates seceret and configmaps 
-
+- Set a callback url as `https://13.133.133.12:5556/dex/callback` in Redirect URIs section when you are setting up your Application. 
 ## Pre-requisites
 - Lets run following command before our deployments 
 
