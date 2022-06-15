@@ -27,13 +27,9 @@ checkfile ssl/server.crt
 checkfile ssl/server.key
 # Create namespace 
 kubectl create ns $namespace 
-# Create argo-workflow-sso secret 
-kubectl create secret generic argo-workflows-sso --from-literal=client-id=${clientid} --from-literal=client-secret=${clientsecret} -n $namespace
 # Create TLS Secret for dex
 kubectl create secret tls tls-secret --cert=ssl/server.crt --key=ssl/server.key -n $namespace 
 # Create Configmap with ca file which will be added to argo server deployment
 kubectl create configmap dex-ca --from-file ca.crt=ssl/rootCA.crt -n $namespace 
 #Update secret in value.yaml
 echo "Update Values.yaml under awdex-microsoft"
-
-

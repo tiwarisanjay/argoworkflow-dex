@@ -2,7 +2,7 @@ apiVersion: v2
 name: awdex-microsoft
 description: A Helm chart for argo workflow integration with dex using microsoft connector
 type: application
-version: 0.1.0
+version: 0.3.0
 appVersion: "v2.30.0"
 dependencies:
 - name: argo-workflows
